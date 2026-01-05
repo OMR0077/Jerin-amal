@@ -14,7 +14,13 @@ body {
     line-height: 1.6;
     color: #ffffff;
     overflow-x: hidden;
-    background-color: #000; /* Add visible background to test CSS loading */
+    background-color: #000;
+    background-image: url('images/couple1.JPG');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
 }
 
 /* ===== SECTION BASE STYLES ===== */
@@ -31,6 +37,7 @@ body {
     background-attachment: fixed;
     transition: background-image 0.8s ease-in-out;
     overflow: hidden;
+    min-height: 600px;
 }
 
 .section::before {
@@ -67,6 +74,8 @@ body {
     color: white;
     text-align: center;
     min-height: 100vh;
+    width: 100vw;
+    position: relative;
 }
 
 .hero.hero-alt {
@@ -120,6 +129,8 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
+    width: 100vw;
+    position: relative;
 }
 
 .love-story .content h2 {
@@ -147,6 +158,8 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
+    width: 100vw;
+    position: relative;
 }
 
 .photo2 {
@@ -156,6 +169,8 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
+    width: 100vw;
+    position: relative;
 }
 
 .photo3 {
@@ -165,6 +180,8 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
+    width: 100vw;
+    position: relative;
 }
 
 .photo4 {
@@ -174,6 +191,8 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
+    width: 100vw;
+    position: relative;
 }
 
 .photo5 {
@@ -183,6 +202,8 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
+    width: 100vw;
+    position: relative;
 }
 
 .photo6 {
@@ -192,12 +213,75 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
+    width: 100vw;
+    position: relative;
 }
 
 .photo7 {
     background-image: url('images/couple9.JPG');
     background-size: cover;
     background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+.photo8 {
+    background-image: url('images/couple10.JPG');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+.photo9 {
+    background-image: url('images/couple11.JPG');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+.photo10 {
+    background-image: url('images/couple12.JPG');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+.photo11 {
+    background-image: url('images/couple1.JPG');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+.photo12 {
+    background-image: url('images/couple2.JPG');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    min-height: 100vh;
+    width: 100vw;
+    position: relative;
+}
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
@@ -271,6 +355,8 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
+    width: 100vw;
+    position: relative;
 }
 
 .wedding-details::before {
@@ -343,6 +429,12 @@ body {
 
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
+    body {
+        background-attachment: scroll !important;
+        background-size: cover;
+        background-position: center top;
+    }
+    
     .content {
         padding: 0 15px;
     }
@@ -359,12 +451,46 @@ body {
     .section {
         height: 100vh;
         min-height: 600px;
-        background-attachment: scroll; /* Disable fixed backgrounds on mobile */
-        transition: background-image 0.6s ease-in-out; /* Faster transitions on mobile */
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        transition: background-image 0.6s ease-in-out;
+    }
+    
+    .hero, .love-story, .wedding-details, .closing,
+    .photo1, .photo2, .photo3, .photo4, .photo5,
+    .photo6, .photo7, .photo8, .photo9, .photo10,
+    .photo11, .photo12 {
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center center !important;
     }
 }
 
 @media (max-width: 480px) {
+    body {
+        background-attachment: scroll !important;
+        background-size: 100% auto;
+        background-position: center top;
+    }
+    
+    .section {
+        background-attachment: scroll !important;
+        background-size: 100% auto !important;
+        background-position: center top !important;
+        min-height: 500px;
+        padding: 20px 0;
+    }
+    
+    .hero, .love-story, .wedding-details, .closing,
+    .photo1, .photo2, .photo3, .photo4, .photo5,
+    .photo6, .photo7, .photo8, .photo9, .photo10,
+    .photo11, .photo12 {
+        background-attachment: scroll !important;
+        background-size: 100% auto !important;
+        background-position: center top !important;
+    }
+    
     .hero .content .date {
         padding: 10px 20px;
         font-size: 1.2rem;
@@ -372,6 +498,11 @@ body {
     
     .detail-item {
         padding: 1rem;
+    }
+    
+    .content {
+        padding: 0 10px;
+        max-width: 95%;
     }
 }
 
