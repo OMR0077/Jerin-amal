@@ -16,7 +16,7 @@ body {
     overflow-x: hidden;
     background-color: #000;
     background-image: url('images/couple1.JPG');
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -31,7 +31,7 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -67,7 +67,7 @@ body {
 /* ===== HERO SECTION ===== */
 .hero {
     background-image: url('images/couple1.JPG');
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -124,7 +124,7 @@ body {
 /* ===== LOVE STORY SECTION ===== */
 .love-story {
     background-image: url('images/couple2.JPG');
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -153,7 +153,7 @@ body {
 /* ===== PHOTO SECTIONS ===== */
 .photo1 {
     background-image: url('images/couple3.JPG');
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -164,7 +164,7 @@ body {
 
 .photo2 {
     background-image: url('images/couple4.JPG');
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -175,7 +175,7 @@ body {
 
 .photo3 {
     background-image: url('images/couple5.JPG');
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -186,7 +186,7 @@ body {
 
 .photo4 {
     background-image: url('images/couple6.JPG');
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -197,7 +197,7 @@ body {
 
 .photo5 {
     background-image: url('images/couple7.JPG');
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -208,7 +208,7 @@ body {
 
 .photo6 {
     background-image: url('images/couple8.JPG');
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -219,7 +219,7 @@ body {
 
 .photo7 {
     background-image: url('images/couple9.JPG');
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -230,7 +230,7 @@ body {
 
 .photo8 {
     background-image: url('images/couple10.JPG');
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -241,7 +241,7 @@ body {
 
 .photo9 {
     background-image: url('images/couple11.JPG');
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -252,7 +252,7 @@ body {
 
 .photo10 {
     background-image: url('images/couple12.JPG');
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -263,7 +263,7 @@ body {
 
 .photo11 {
     background-image: url('images/couple1.JPG');
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -274,7 +274,7 @@ body {
 
 .photo12 {
     background-image: url('images/couple2.JPG');
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -350,7 +350,7 @@ body {
 /* ===== WEDDING DETAILS SECTION ===== */
 .wedding-details {
     background-image: url('images/couple3.JPG');
-    background-size: cover;
+    background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -400,7 +400,7 @@ body {
 /* ===== CLOSING SECTION ===== */
 .closing {
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('images/couple4.JPG');
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-attachment: fixed;
 }
@@ -430,9 +430,9 @@ body {
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
     body {
-        background-attachment: scroll !important;
-        background-size: cover;
-        background-position: center top;
+        background-attachment: fixed !important;
+        background-size: cover !important;
+        background-position: center center !important;
     }
     
     .content {
@@ -449,46 +449,49 @@ body {
     }
     
     .section {
-        height: 100vh;
-        min-height: 600px;
-        background-attachment: scroll !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        background-attachment: fixed !important;
         background-size: cover !important;
         background-position: center center !important;
         transition: background-image 0.6s ease-in-out;
+        padding: 0 !important;
+        width: 100vw !important;
+        overflow: hidden !important;
     }
     
     .hero, .love-story, .wedding-details, .closing,
     .photo1, .photo2, .photo3, .photo4, .photo5,
     .photo6, .photo7, .photo8, .photo9, .photo10,
     .photo11, .photo12 {
-        background-attachment: scroll !important;
+        background-attachment: fixed !important;
         background-size: cover !important;
         background-position: center center !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        width: 100vw !important;
     }
 }
 
 @media (max-width: 480px) {
-    body {
-        background-attachment: scroll !important;
-        background-size: 100% auto;
-        background-position: center top;
-    }
-    
     .section {
-        background-attachment: scroll !important;
-        background-size: 100% auto !important;
-        background-position: center top !important;
-        min-height: 500px;
-        padding: 20px 0;
+        background-attachment: fixed !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        height: auto;
+        min-height: 100vh;
+        padding: 0;
     }
     
     .hero, .love-story, .wedding-details, .closing,
     .photo1, .photo2, .photo3, .photo4, .photo5,
     .photo6, .photo7, .photo8, .photo9, .photo10,
     .photo11, .photo12 {
-        background-attachment: scroll !important;
-        background-size: 100% auto !important;
-        background-position: center top !important;
+        background-attachment: fixed !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        height: auto;
+        min-height: 100vh;
     }
     
     .hero .content .date {
@@ -503,6 +506,62 @@ body {
     .content {
         padding: 0 10px;
         max-width: 95%;
+    }
+}
+
+/* ===== EXTRA SMALL SCREENS ===== */
+@media (max-width: 360px) {
+    .section {
+        min-height: 450px;
+        padding: 15px 0;
+        background-size: cover !important;
+        background-position: center center !important;
+    }
+    
+    .hero, .love-story, .wedding-details, .closing,
+    .photo1, .photo2, .photo3, .photo4, .photo5,
+    .photo6, .photo7, .photo8, .photo9, .photo10,
+    .photo11, .photo12 {
+        min-height: 450px;
+        background-size: cover !important;
+        background-position: center center !important;
+    }
+    
+    .content {
+        padding: 0 8px;
+        max-width: 98%;
+    }
+    
+    .hero .content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero .content .subtitle {
+        font-size: 1rem;
+    }
+}
+
+/* ===== LANDSCAPE MOBILE ORIENTATION ===== */
+@media (max-height: 500px) and (orientation: landscape) {
+    .section {
+        height: auto;
+        min-height: 100vh;
+        padding: 10px 0;
+        background-size: cover !important;
+        background-position: center center !important;
+    }
+    
+    .hero, .love-story, .wedding-details, .closing,
+    .photo1, .photo2, .photo3, .photo4, .photo5,
+    .photo6, .photo7, .photo8, .photo9, .photo10,
+    .photo11, .photo12 {
+        min-height: 100vh;
+        background-size: cover !important;
+        background-position: center center !important;
+    }
+    
+    .content {
+        padding: 10px 15px;
     }
 }
 
