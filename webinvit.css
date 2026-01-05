@@ -282,10 +282,7 @@ body {
     width: 100vw;
     position: relative;
 }
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    min-height: 100vh;
-}
+
 
 .photo8 {
     background-image: url('images/couple10.JPG');
