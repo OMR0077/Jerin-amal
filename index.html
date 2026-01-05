@@ -26,6 +26,25 @@
             overflow-x: hidden;
         }
         
+        /* Mobile background adjustments */
+        @media (max-width: 768px) {
+            body {
+                background-attachment: scroll !important;
+                background-size: cover;
+                background-position: center top;
+                min-height: auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                background-attachment: scroll !important;
+                background-size: 100% auto;
+                background-position: center top;
+                min-height: auto;
+            }
+        }
+        
         .section { 
             width: 100vw;
             display: flex; 
@@ -35,6 +54,23 @@
             background: rgba(0, 0, 0, 0.5);
             padding: 80px 0;
             box-sizing: border-box;
+        }
+        
+        /* Mobile section adjustments */
+        @media (max-width: 768px) {
+            .section {
+                background: rgba(0, 0, 0, 0.6);
+                padding: 60px 0;
+                min-height: auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .section {
+                background: rgba(0, 0, 0, 0.7);
+                padding: 40px 0;
+                min-height: auto;
+            }
         }
         
         .content { 
@@ -509,7 +545,7 @@
         </div>
     </section>
 
-    <!-- JavaScript for instant scroll-based background changes -->
+    <!-- JavaScript for responsive scroll-based background changes -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Background images for quick cycling while scrolling
@@ -532,20 +568,43 @@
             let lastScrollY = 0;
             let scrollTicking = false;
             let imagesReady = false;
-            const scrollStep = 50; // Change image every 50px of scroll
+            
+            // Responsive scroll step based on device type
+            const isMobile = window.innerWidth <= 768;
+            const isTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
+            
+            let scrollStep = 50; // Default for desktop
+            if (isMobile) {
+                scrollStep = 30; // More sensitive on mobile
+            } else if (isTablet) {
+                scrollStep = 40; // Medium sensitivity on tablet
+            }
             
             // Simple but effective image preloading
             const preloadedImages = [];
             let imagesLoaded = 0;
             
             console.log('Starting to preload images...');
+            console.log(`Device type: ${isMobile ? 'Mobile' : isTablet ? 'Tablet' : 'Desktop'}, Scroll step: ${scrollStep}px`);
             
-            // Set initial background immediately
-            document.body.style.backgroundImage = `url('${backgroundImages[0]}')`;
-            document.body.style.backgroundSize = 'cover';
-            document.body.style.backgroundPosition = 'center center';
-            document.body.style.backgroundRepeat = 'no-repeat';
-            document.body.style.backgroundAttachment = 'fixed';
+            // Set initial background immediately with responsive properties
+            function setInitialBackground() {
+                document.body.style.backgroundImage = `url('${backgroundImages[0]}')`;
+                document.body.style.backgroundRepeat = 'no-repeat';
+                
+                // Responsive initial settings
+                if (isMobile) {
+                    document.body.style.backgroundAttachment = 'scroll';
+                    document.body.style.backgroundSize = window.innerWidth <= 480 ? '100% auto' : 'cover';
+                    document.body.style.backgroundPosition = 'center top';
+                } else {
+                    document.body.style.backgroundAttachment = 'fixed';
+                    document.body.style.backgroundSize = 'cover';
+                    document.body.style.backgroundPosition = 'center center';
+                }
+            }
+            
+            setInitialBackground();
             
             // Preload images using Image objects for reliability
             backgroundImages.forEach((src, index) => {
@@ -574,37 +633,74 @@
                 img.src = src;
             });
             
-            // Function to change background instantly
+            // Responsive function to change background
             function changeBackground(index) {
                 console.log(`Changing background to image ${index}: ${backgroundImages[index]}`);
                 
-                // Force immediate change with all properties
+                // Force immediate change with responsive properties
                 document.body.style.transition = 'none';
                 document.body.style.backgroundImage = `url('${backgroundImages[index]}')`;
-                document.body.style.backgroundSize = 'cover';
-                document.body.style.backgroundPosition = 'center center';
                 document.body.style.backgroundRepeat = 'no-repeat';
-                document.body.style.backgroundAttachment = 'fixed';
+                
+                // Responsive background settings
+                if (isMobile) {
+                    document.body.style.backgroundAttachment = 'scroll';
+                    document.body.style.backgroundSize = window.innerWidth <= 480 ? '100% auto' : 'cover';
+                    document.body.style.backgroundPosition = 'center top';
+                } else {
+                    document.body.style.backgroundAttachment = 'fixed';
+                    document.body.style.backgroundSize = 'cover';
+                    document.body.style.backgroundPosition = 'center center';
+                }
             }
             
-            // Enable scroll detection after images are loaded
+            // Enable responsive scroll detection
             function enableScrollDetection() {
-                console.log('Scroll detection enabled - you can now scroll to change images');
+                console.log('Responsive scroll detection enabled');
                 
+                // Regular scroll detection
                 window.addEventListener('scroll', function() {
                     if (!scrollTicking) {
                         requestAnimationFrame(handleScrollChange);
                         scrollTicking = true;
                     }
                 });
+                
+                // Touch events for better mobile support
+                if (isMobile) {
+                    let touchStartY = 0;
+                    let touchEndY = 0;
+                    
+                    document.addEventListener('touchstart', function(e) {
+                        touchStartY = e.touches[0].clientY;
+                    }, { passive: true });
+                    
+                    document.addEventListener('touchend', function(e) {
+                        touchEndY = e.changedTouches[0].clientY;
+                        const touchDiff = Math.abs(touchStartY - touchEndY);
+                        
+                        if (touchDiff > 50) { // Minimum touch distance for image change
+                            if (touchStartY > touchEndY) {
+                                // Swiping up (scrolling down)
+                                currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+                            } else {
+                                // Swiping down (scrolling up)
+                                currentImageIndex = currentImageIndex === 0 
+                                    ? backgroundImages.length - 1 
+                                    : currentImageIndex - 1;
+                            }
+                            changeBackground(currentImageIndex);
+                        }
+                    }, { passive: true });
+                }
             }
             
-            // Fast scroll-based image changing
+            // Responsive scroll-based image changing
             function handleScrollChange() {
                 const scrollY = window.scrollY;
                 const scrollDifference = Math.abs(scrollY - lastScrollY);
                 
-                // Change image when scroll threshold is met
+                // Use responsive scroll threshold
                 if (scrollDifference >= scrollStep) {
                     console.log(`Scroll detected: ${scrollY}, difference: ${scrollDifference}`);
                     
@@ -627,11 +723,39 @@
                 scrollTicking = false;
             }
             
+            // Handle window resize for responsiveness
+            window.addEventListener('resize', function() {
+                const newIsMobile = window.innerWidth <= 768;
+                const newIsTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
+                
+                // Update scroll step based on new screen size
+                if (newIsMobile) {
+                    scrollStep = 30;
+                } else if (newIsTablet) {
+                    scrollStep = 40;
+                } else {
+                    scrollStep = 50;
+                }
+                
+                // Update background properties responsively
+                if (newIsMobile) {
+                    document.body.style.backgroundAttachment = 'scroll';
+                    document.body.style.backgroundSize = window.innerWidth <= 480 ? '100% auto' : 'cover';
+                    document.body.style.backgroundPosition = 'center top';
+                } else {
+                    document.body.style.backgroundAttachment = 'fixed';
+                    document.body.style.backgroundSize = 'cover';
+                    document.body.style.backgroundPosition = 'center center';
+                }
+                
+                console.log(`Resized - New scroll step: ${scrollStep}px`);
+            });
+            
             // Content animations for sections
             const sections = document.querySelectorAll('.section');
             
             const observerOptions = {
-                threshold: 0.3,
+                threshold: isMobile ? 0.2 : 0.3, // Lower threshold for mobile
                 rootMargin: '0px'
             };
             
@@ -645,27 +769,29 @@
                         const date = entry.target.querySelector('.date');
                         const detailItems = entry.target.querySelectorAll('.detail-item');
                         
-                        // Quick content animations
+                        // Quick content animations with responsive timing
+                        const animationDelay = isMobile ? 30 : 50;
+                        
                         if (content) {
-                            setTimeout(() => content.classList.add('animate'), 50);
+                            setTimeout(() => content.classList.add('animate'), animationDelay);
                         }
                         if (h1) {
-                            setTimeout(() => h1.classList.add('animate'), 100);
+                            setTimeout(() => h1.classList.add('animate'), animationDelay * 2);
                         }
                         if (h2) {
-                            setTimeout(() => h2.classList.add('animate'), 150);
+                            setTimeout(() => h2.classList.add('animate'), animationDelay * 3);
                         }
                         
                         paragraphs.forEach((p, index) => {
-                            setTimeout(() => p.classList.add('animate'), 200 + (index * 50));
+                            setTimeout(() => p.classList.add('animate'), (animationDelay * 4) + (index * animationDelay));
                         });
                         
                         if (date) {
-                            setTimeout(() => date.classList.add('animate'), 250);
+                            setTimeout(() => date.classList.add('animate'), animationDelay * 5);
                         }
                         
                         detailItems.forEach((item, index) => {
-                            setTimeout(() => item.classList.add('animate'), 200 + (index * 50));
+                            setTimeout(() => item.classList.add('animate'), (animationDelay * 4) + (index * animationDelay));
                         });
                     }
                 });
@@ -678,7 +804,7 @@
             // Hide scroll indicator
             let scrolled = false;
             window.addEventListener('scroll', function() {
-                if (!scrolled && window.scrollY > 100) {
+                if (!scrolled && window.scrollY > (isMobile ? 50 : 100)) {
                     const indicator = document.querySelector('.scroll-indicator');
                     if (indicator) {
                         indicator.style.opacity = '0';
