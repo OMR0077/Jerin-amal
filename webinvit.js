@@ -1,93 +1,213 @@
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
 
-// Define image sets for each section
-const sectionImages = {
-    hero: ['images/couple1.JPG', 'images/couple2.JPG', 'images/couple3.JPG'],
-    'love-story': ['images/couple2.JPG', 'images/couple4.JPG', 'images/couple5.JPG'],
-    photo1: ['images/couple3.JPG', 'images/couple6.JPG', 'images/couple7.JPG'],
-    photo2: ['images/couple4.JPG', 'images/couple8.JPG', 'images/couple9.JPG'],
-    photo3: ['images/couple5.JPG', 'images/couple10.JPG', 'images/couple11.JPG'],
-    photo4: ['images/couple6.JPG', 'images/couple12.JPG', 'images/couple1.JPG'],
-    photo5: ['images/couple7.JPG', 'images/couple2.JPG', 'images/couple3.JPG'],
-    photo6: ['images/couple8.JPG', 'images/couple4.JPG', 'images/couple5.JPG'],
-    photo7: ['images/couple9.JPG', 'images/couple6.JPG', 'images/couple7.JPG'],
-    photo8: ['images/couple10.JPG', 'images/couple8.JPG', 'images/couple9.JPG'],
-    photo9: ['images/couple11.JPG', 'images/couple10.JPG', 'images/couple11.JPG'],
-    photo10: ['images/couple12.JPG', 'images/couple1.JPG', 'images/couple2.JPG'],
-    photo11: ['images/couple1.JPG', 'images/couple3.JPG', 'images/couple4.JPG'],
-    photo12: ['images/couple2.JPG', 'images/couple5.JPG', 'images/couple6.JPG'],
-    'wedding-details': ['images/couple3.JPG', 'images/couple7.JPG', 'images/couple8.JPG'],
-    closing: ['images/couple4.JPG', 'images/couple9.JPG', 'images/couple10.JPG']
-};
+// All available background images for cycling
+const backgroundImages = [
+    'images/couple1.JPG', 'images/couple2.JPG', 'images/couple3.JPG',
+    'images/couple4.JPG', 'images/couple5.JPG', 'images/couple6.JPG',
+    'images/couple7.JPG', 'images/couple8.JPG', 'images/couple9.JPG',
+    'images/couple10.JPG', 'images/couple11.JPG', 'images/couple12.JPG'
+];
 
-let currentImageIndices = {};
+// Scroll tracking variables
+let currentImageIndex = 0;
 let lastScrollY = 0;
 let scrollDirection = 'down';
+let ticking = false;
+let imagesReady = false;
+let wheelTimeout;
+let lastWheelTime = 0;
 
-// Initialize current image indices
-Object.keys(sectionImages).forEach(sectionClass => {
-    currentImageIndices[sectionClass] = 0;
-});
+// Device responsiveness detection
+const isMobile = () => window.innerWidth <= 768;
+const isTablet = () => window.innerWidth > 768 && window.innerWidth <= 1024;
 
-// Smooth background image transition function
-function changeBackgroundImage(section, imageUrl, callback) {
-    // Add transitioning class for smooth overlay effect
-    section.classList.add('transitioning');
+// Dynamic scroll sensitivity based on device
+const getScrollStep = () => {
+    if (isMobile()) return 20; // More sensitive on mobile
+    if (isTablet()) return 25; // Medium sensitivity on tablet
+    return 30; // Less sensitive on desktop for better control
+};
+
+// Preload images and setup responsive background changing
+function preloadImages() {
+    let loadedCount = 0;
     
-    // Create a new image to preload
-    const img = new Image();
-    img.onload = function() {
-        // Change background with CSS transition
-        section.style.backgroundImage = `url('${imageUrl}')`;
+    backgroundImages.forEach((src, index) => {
+        const img = new Image();
+        img.onload = () => {
+            loadedCount++;
+            if (loadedCount === backgroundImages.length) {
+                imagesReady = true;
+                console.log('All images preloaded successfully');
+                setupScrollDetection();
+            }
+        };
+        img.onerror = () => {
+            loadedCount++;
+            console.warn(`Failed to load image: ${src}`);
+            if (loadedCount === backgroundImages.length) {
+                imagesReady = true;
+                setupScrollDetection();
+            }
+        };
+        img.src = src;
+    });
+}
+
+// Set responsive background properties
+function setBackgroundProperties() {
+    const mobile = isMobile();
+    document.body.style.backgroundAttachment = mobile ? 'scroll' : 'fixed';
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundPosition = 'center center';
+    document.body.style.backgroundRepeat = 'no-repeat';
+}
+
+// Smooth background image transition
+function changeBackgroundImage(imageUrl) {
+    if (!imageUrl) return;
+    
+    // Add transition for smooth change
+    document.body.style.transition = 'background-image 0.5s ease-in-out';
+    document.body.style.backgroundImage = `url('${imageUrl}')`;
+    
+    // Reset transition after change
+    setTimeout(() => {
+        document.body.style.transition = '';
+        setBackgroundProperties();
+    }, 500);
+}
+
+// Handle scroll-based image changes with responsive sensitivity
+function handleScrollChange() {
+    if (!imagesReady) return;
+    
+    const scrollY = window.scrollY;
+    const scrollDiff = Math.abs(scrollY - lastScrollY);
+    const scrollStep = getScrollStep();
+    
+    // Determine scroll direction first
+    scrollDirection = scrollY > lastScrollY ? 'down' : 'up';
+    
+    // Only change image if scroll difference exceeds threshold
+    if (scrollDiff >= scrollStep) {
+        console.log(`Scroll ${scrollDirection}: ${scrollY}, diff: ${scrollDiff}, step: ${scrollStep}`);
         
-        // Remove transitioning class after a short delay
-        setTimeout(() => {
-            section.classList.remove('transitioning');
-            if (callback) callback();
-        }, 300);
-    };
-    img.src = imageUrl;
-}
-
-// Handle scroll-based image changes
-function handleScrollImageChange(section, sectionClass) {
-    const images = sectionImages[sectionClass];
-    if (!images || images.length === 0) return;
-    
-    let newIndex;
-    if (scrollDirection === 'down') {
-        // Next image
-        newIndex = (currentImageIndices[sectionClass] + 1) % images.length;
-    } else {
-        // Previous image  
-        newIndex = currentImageIndices[sectionClass] - 1;
-        if (newIndex < 0) newIndex = images.length - 1;
-    }
-    
-    if (newIndex !== currentImageIndices[sectionClass]) {
-        currentImageIndices[sectionClass] = newIndex;
-        const newImage = images[newIndex];
-        changeBackgroundImage(section, newImage);
+        // Calculate new image index
+        if (scrollDirection === 'down') {
+            currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+        } else {
+            currentImageIndex = currentImageIndex === 0 
+                ? backgroundImages.length - 1 
+                : currentImageIndex - 1;
+        }
+        
+        console.log(`New image index: ${currentImageIndex}, Image: ${backgroundImages[currentImageIndex]}`);
+        
+        // Change background image
+        const newImage = backgroundImages[currentImageIndex];
+        changeBackgroundImage(newImage);
+        
+        // Update last scroll position after image change
+        lastScrollY = scrollY;
     }
 }
 
-// Detect scroll direction
-function updateScrollDirection() {
-    const currentScrollY = window.scrollY;
-    scrollDirection = currentScrollY > lastScrollY ? 'down' : 'up';
-    lastScrollY = currentScrollY;
+// Setup scroll detection with proper throttling
+function setupScrollDetection() {
+    console.log('Setting up scroll detection...');
+    
+    // Initialize lastScrollY
+    lastScrollY = window.scrollY;
+    
+    // Main scroll handler with improved detection
+    window.addEventListener('scroll', () => {
+        if (!ticking && imagesReady) {
+            requestAnimationFrame(() => {
+                handleScrollChange();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+    
+    // Additional wheel event for better scroll detection
+    window.addEventListener('wheel', (e) => {
+        if (!imagesReady) return;
+        
+        const now = Date.now();
+        // Throttle wheel events to prevent too rapid changes
+        if (now - lastWheelTime < 100) return;
+        lastWheelTime = now;
+        
+        // Direct wheel direction detection
+        if (Math.abs(e.deltaY) > 10) {
+            if (e.deltaY > 0) {
+                // Scrolling down
+                currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+            } else {
+                // Scrolling up
+                currentImageIndex = currentImageIndex === 0 
+                    ? backgroundImages.length - 1 
+                    : currentImageIndex - 1;
+            }
+            
+            console.log(`Wheel scroll: ${e.deltaY > 0 ? 'down' : 'up'}, New index: ${currentImageIndex}`);
+            const newImage = backgroundImages[currentImageIndex];
+            changeBackgroundImage(newImage);
+        }
+    }, { passive: true });
+    
+    // Touch support for mobile devices
+    if (isMobile()) {
+        let touchStartY = 0;
+        
+        document.addEventListener('touchstart', (e) => {
+            touchStartY = e.touches[0].clientY;
+        }, { passive: true });
+        
+        document.addEventListener('touchend', (e) => {
+            const touchEndY = e.changedTouches[0].clientY;
+            const touchDiff = Math.abs(touchStartY - touchEndY);
+            
+            if (touchDiff > 30) { // Reduced minimum swipe distance
+                if (touchStartY > touchEndY) {
+                    // Swipe up - next image
+                    currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+                } else {
+                    // Swipe down - previous image
+                    currentImageIndex = currentImageIndex === 0 
+                        ? backgroundImages.length - 1 
+                        : currentImageIndex - 1;
+                }
+                
+                console.log(`Touch swipe: ${touchStartY > touchEndY ? 'up' : 'down'}, New index: ${currentImageIndex}`);
+                const newImage = backgroundImages[currentImageIndex];
+                changeBackgroundImage(newImage);
+            }
+        }, { passive: true });
+    }
 }
 
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Create animation timeline for each section
+    // Initialize responsive background properties
+    setBackgroundProperties();
+    
+    // Set initial background image
+    document.body.style.backgroundImage = `url('${backgroundImages[0]}')`;
+    
+    // Start image preloading
+    preloadImages();
+    
+    // Create GSAP animations for each section
     const sections = gsap.utils.toArray('.section');
     
     sections.forEach((section, index) => {
-        const animateElements = section.querySelectorAll('.animate-text');
-        const sectionClass = section.classList[1]; // Get second class name (hero, love-story, etc.)
+        const content = section.querySelector('.content');
+        const animateElements = section.querySelectorAll('.animate-text, h1, h2, h3, p, .date, .detail-item');
         
         // Create timeline for this section
         const tl = gsap.timeline({
@@ -95,45 +215,50 @@ document.addEventListener('DOMContentLoaded', function() {
                 trigger: section,
                 start: "top 80%",
                 end: "bottom 20%",
-                toggleActions: "play none none none",
-                once: true, // Animation runs only once
-                onEnter: () => {
-                    // Change background image when section enters viewport
-                    updateScrollDirection();
-                    handleScrollImageChange(section, sectionClass);
-                },
-                onLeave: () => {
-                    // Optionally change image when leaving
-                    updateScrollDirection();
-                },
-                onEnterBack: () => {
-                    // Change image when scrolling back up
-                    updateScrollDirection();
-                    handleScrollImageChange(section, sectionClass);
-                }
+                toggleActions: "play none none reverse",
+                once: false,
             }
         });
         
-        // Animate each element in the section
-        animateElements.forEach((element, elementIndex) => {
-            tl.fromTo(element, 
+        // Animate content container first
+        if (content) {
+            tl.fromTo(content, 
                 {
                     opacity: 0,
-                    y: 50
+                    y: 60,
+                    scale: 0.95
                 },
                 {
                     opacity: 1,
                     y: 0,
-                    duration: 1,
+                    scale: 1,
+                    duration: 0.8,
+                    ease: "power2.out"
+                }
+            );
+        }
+        
+        // Animate individual elements with stagger
+        if (animateElements.length > 0) {
+            tl.fromTo(animateElements, 
+                {
+                    opacity: 0,
+                    y: 30
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    stagger: 0.1,
                     ease: "power2.out"
                 },
-                elementIndex * 0.2 // Stagger animations
+                "-=0.4"
             );
-        });
+        }
     });
     
     // Parallax effect for background images (desktop only)
-    if (window.innerWidth > 768) {
+    if (!isMobile()) {
         gsap.utils.toArray('.section').forEach(section => {
             gsap.to(section, {
                 backgroundPosition: "50% 100%",
@@ -149,51 +274,22 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Hide scroll indicator after first scroll
-    let scrolled = false;
+    let scrollIndicatorHidden = false;
     window.addEventListener('scroll', function() {
-        updateScrollDirection();
-        
-        if (!scrolled && window.scrollY > 100) {
-            gsap.to('.scroll-indicator', {
-                opacity: 0,
-                duration: 0.5,
-                ease: "power2.out"
-            });
-            scrolled = true;
-        }
-    });
-    
-    // Advanced scroll-based image cycling
-    let ticking = false;
-    window.addEventListener('scroll', function() {
-        if (!ticking) {
-            requestAnimationFrame(() => {
-                updateScrollDirection();
-                
-                // Check which section is most visible and potentially change its image
-                sections.forEach(section => {
-                    const rect = section.getBoundingClientRect();
-                    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-                    const visiblePercentage = Math.max(0, Math.min(1, 
-                        (window.innerHeight - Math.max(0, rect.top)) / window.innerHeight
-                    ));
-                    
-                    // Change image when section is significantly visible and user scrolls
-                    if (isVisible && visiblePercentage > 0.3 && Math.abs(window.scrollY - lastScrollY) > 50) {
-                        const sectionClass = section.classList[1];
-                        if (Math.random() > 0.7) { // Add some randomness to avoid too frequent changes
-                            handleScrollImageChange(section, sectionClass);
-                        }
-                    }
+        if (!scrollIndicatorHidden && window.scrollY > (isMobile() ? 50 : 100)) {
+            const indicator = document.querySelector('.scroll-indicator');
+            if (indicator) {
+                gsap.to(indicator, {
+                    opacity: 0,
+                    duration: 0.5,
+                    ease: "power2.out"
                 });
-                
-                ticking = false;
-            });
-            ticking = true;
+            }
+            scrollIndicatorHidden = true;
         }
     });
     
-    // Smooth scroll for any internal links (if added)
+    // Smooth scroll for internal links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -207,8 +303,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Refresh ScrollTrigger on window resize
+    // Handle window resize for responsiveness
+    let resizeTimeout;
     window.addEventListener('resize', () => {
-        ScrollTrigger.refresh();
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            setBackgroundProperties();
+            ScrollTrigger.refresh();
+        }, 250);
     });
+    
+    // Add loading class for initial animations
+    document.body.classList.add('loaded');
 });

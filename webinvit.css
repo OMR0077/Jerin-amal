@@ -7,6 +7,8 @@
 
 html {
     scroll-behavior: smooth;
+    height: 100%;
+    overflow-x: hidden;
 }
 
 body {
@@ -21,6 +23,21 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     min-height: 100vh;
+    height: 100%;
+    position: relative;
+    transition: background-image 0.5s ease-in-out;
+}
+
+/* Mobile specific body styles */
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+body.loaded {
+    transition: background-image 0.5s ease-in-out;
 }
 
 /* ===== SECTION BASE STYLES ===== */
