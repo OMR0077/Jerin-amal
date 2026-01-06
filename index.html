@@ -551,8 +551,44 @@
     <!-- Ensure proper section initialization -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // iOS Detection
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                         (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            
+            console.log('iOS detected:', isIOS);
+            
             // Initialize sections with proper background images
             const sections = document.querySelectorAll('.section');
+            
+            // iOS-specific fixes for photo sections
+            if (isIOS) {
+                document.body.classList.add('ios-device');
+                
+                // Fix all photo sections for iOS
+                const photoSections = document.querySelectorAll('.photo1, .photo2, .photo3, .photo4, .photo5, .photo6, .photo7, .photo8, .photo9, .photo10, .photo11, .photo12');
+                photoSections.forEach((section, index) => {
+                    section.style.backgroundAttachment = 'scroll';
+                    section.style.webkitBackgroundSize = 'cover';
+                    section.style.backgroundSize = 'cover';
+                    section.style.minHeight = '100vh';
+                    section.style.height = '100vh';
+                    section.style.webkitTransform = 'translate3d(0,0,0)';
+                    section.style.transform = 'translate3d(0,0,0)';
+                    section.style.webkitBackfaceVisibility = 'hidden';
+                    section.style.backfaceVisibility = 'hidden';
+                    section.style.display = 'flex';
+                    section.style.alignItems = 'center';
+                    section.style.justifyContent = 'center';
+                    section.style.position = 'relative';
+                    section.style.width = '100vw';
+                    
+                    // Ensure background image is set correctly
+                    const imageNumber = index + 3; // photo1 uses couple3.JPG, photo2 uses couple4.JPG, etc.
+                    const imagePath = `url('images/couple${imageNumber}.JPG')`;
+                    section.style.backgroundImage = imagePath;
+                    console.log(`Setting photo${index + 1} background to:`, imagePath);
+                });
+            }
             
             // Set initial background image for body
             if (sections.length > 0) {
@@ -560,7 +596,7 @@
                 document.body.style.backgroundSize = 'cover';
                 document.body.style.backgroundPosition = 'center center';
                 document.body.style.backgroundRepeat = 'no-repeat';
-                document.body.style.backgroundAttachment = window.innerWidth <= 768 ? 'scroll' : 'fixed';
+                document.body.style.backgroundAttachment = (window.innerWidth <= 768 || isIOS) ? 'scroll' : 'fixed';
             }
         });
     </script>

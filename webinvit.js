@@ -216,6 +216,22 @@ document.addEventListener('DOMContentLoaded', function() {
         const photoSections = document.querySelectorAll('.photo1, .photo2, .photo3, .photo4, .photo5, .photo6, .photo7, .photo8, .photo9, .photo10, .photo11, .photo12');
         photoSections.forEach(section => {
             section.style.backgroundAttachment = 'scroll';
+            section.style.webkitBackgroundSize = 'cover';
+            section.style.backgroundSize = 'cover';
+            section.style.backgroundPosition = 'center center';
+            section.style.backgroundRepeat = 'no-repeat';
+            section.style.minHeight = '100vh';
+            section.style.height = '100vh';
+            section.style.webkitTransform = 'translate3d(0,0,0)';
+            section.style.transform = 'translate3d(0,0,0)';
+        });
+        
+        // Ensure all sections have proper iOS styling
+        const allSections = document.querySelectorAll('.section');
+        allSections.forEach(section => {
+            section.style.webkitOverflowScrolling = 'touch';
+            section.style.webkitBackfaceVisibility = 'hidden';
+            section.style.backfaceVisibility = 'hidden';
         });
         
         // Add viewport meta for proper iOS display
