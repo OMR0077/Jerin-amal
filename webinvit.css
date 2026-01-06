@@ -471,24 +471,33 @@ body {
 }
 
 @media (max-width: 480px) {
-    .section {
-        background-attachment: fixed !important;
+    body {
+        background-attachment: scroll !important;
         background-size: cover !important;
         background-position: center center !important;
-        height: auto;
-        min-height: 100vh;
-        padding: 0;
+    }
+    
+    .section {
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        padding: 0 !important;
+        width: 100vw !important;
+        overflow: hidden !important;
     }
     
     .hero, .love-story, .wedding-details, .closing,
     .photo1, .photo2, .photo3, .photo4, .photo5,
     .photo6, .photo7, .photo8, .photo9, .photo10,
     .photo11, .photo12 {
-        background-attachment: fixed !important;
+        background-attachment: scroll !important;
         background-size: cover !important;
         background-position: center center !important;
-        height: auto;
-        min-height: 100vh;
+        height: auto !important;
+        min-height: 100vh !important;
+        width: 100vw !important;
     }
     
     .hero .content .date {
@@ -559,6 +568,96 @@ body {
     
     .content {
         padding: 10px 15px;
+    }
+}
+
+/* ===== IPHONE 13 AND HIGH RESOLUTION DEVICES ===== */
+@media only screen 
+  and (device-width: 390px) 
+  and (device-height: 844px) 
+  and (-webkit-device-pixel-ratio: 3) {
+    
+    .section {
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        width: 100vw !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+    }
+    
+    .hero, .love-story, .wedding-details, .closing,
+    .photo1, .photo2, .photo3, .photo4, .photo5,
+    .photo6, .photo7, .photo8, .photo9, .photo10,
+    .photo11, .photo12 {
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        width: 100vw !important;
+    }
+    
+    .content {
+        padding: 0 20px !important;
+        max-width: 100% !important;
+    }
+    
+    .hero .content h1 {
+        font-size: clamp(2.5rem, 8vw, 4.5rem) !important;
+    }
+    
+    .hero .content .subtitle {
+        font-size: clamp(1rem, 3vw, 1.5rem) !important;
+    }
+    
+    .hero .content .date {
+        font-size: clamp(1.2rem, 4vw, 2rem) !important;
+        padding: 12px 25px !important;
+    }
+}
+
+/* ===== HIGH RESOLUTION MOBILE DEVICES (Generic) ===== */
+@media only screen 
+  and (min-device-pixel-ratio: 2) 
+  and (max-width: 430px) 
+  and (orientation: portrait) {
+    
+    body {
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center center !important;
+    }
+    
+    .section {
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        width: 100vw !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+    }
+    
+    .hero, .love-story, .wedding-details, .closing,
+    .photo1, .photo2, .photo3, .photo4, .photo5,
+    .photo6, .photo7, .photo8, .photo9, .photo10,
+    .photo11, .photo12 {
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        height: auto !important;
+        min-height: 100vh !important;
+        width: 100vw !important;
+    }
+    
+    .content {
+        padding: 0 15px !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
 }
 
