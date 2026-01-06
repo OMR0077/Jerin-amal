@@ -21,6 +21,11 @@ let lastWheelTime = 0;
 // Device responsiveness detection
 const isMobile = () => window.innerWidth <= 768;
 const isTablet = () => window.innerWidth > 768 && window.innerWidth <= 1024;
+const isIOS = () => {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+           (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+};
+const isSafari = () => /Safari/.test(navigator.userAgent) && !/Chrome/.test(navigator.userAgent);
 
 // Dynamic scroll sensitivity based on device
 const getScrollStep = () => {
@@ -192,6 +197,33 @@ function setupScrollDetection() {
 
 // Wait for DOM to load
 document.addEventListener('DOMContentLoaded', function() {
+    
+    // iOS-specific optimizations
+    if (isIOS()) {
+        // Add iOS-specific class for styling
+        document.body.classList.add('ios-device');
+        
+        // Force hardware acceleration for better performance
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.style.webkitTransform = 'translate3d(0,0,0)';
+            section.style.transform = 'translate3d(0,0,0)';
+            section.style.webkitBackfaceVisibility = 'hidden';
+            section.style.backfaceVisibility = 'hidden';
+        });
+        
+        // Disable background-attachment fixed on iOS
+        const photoSections = document.querySelectorAll('.photo1, .photo2, .photo3, .photo4, .photo5, .photo6, .photo7, .photo8, .photo9, .photo10, .photo11, .photo12');
+        photoSections.forEach(section => {
+            section.style.backgroundAttachment = 'scroll';
+        });
+        
+        // Add viewport meta for proper iOS display
+        const viewport = document.querySelector('meta[name="viewport"]');
+        if (viewport) {
+            viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover');
+        }
+    }
     
     // Initialize responsive background properties
     setBackgroundProperties();

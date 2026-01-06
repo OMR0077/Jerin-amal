@@ -177,6 +177,18 @@ body.loaded {
     min-height: 100vh;
     width: 100vw;
     position: relative;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+    .photo1 {
+        background-attachment: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
 }
 
 .photo2 {
@@ -515,7 +527,51 @@ body.loaded {
         height: auto !important;
         min-height: 100vh !important;
         width: 100vw !important;
+        -webkit-transform: translate3d(0,0,0) !important;
+        transform: translate3d(0,0,0) !important;
+        -webkit-backface-visibility: hidden !important;
+        backface-visibility: hidden !important;
+        -webkit-overflow-scrolling: touch;
+        will-change: transform, opacity;
     }
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+    .photo1, .photo2, .photo3, .photo4, .photo5,
+    .photo6, .photo7, .photo8, .photo9, .photo10,
+    .photo11, .photo12 {
+        background-attachment: scroll !important;
+        -webkit-overflow-scrolling: touch;
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+    }
+}
+
+/* iOS device specific styles */
+.ios-device .section {
+    background-attachment: scroll !important;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: transform;
+}
+
+.ios-device .photo1,
+.ios-device .photo2,
+.ios-device .photo3,
+.ios-device .photo4,
+.ios-device .photo5,
+.ios-device .photo6,
+.ios-device .photo7,
+.ios-device .photo8,
+.ios-device .photo9,
+.ios-device .photo10,
+.ios-device .photo11,
+.ios-device .photo12 {
+    background-attachment: scroll !important;
+    -webkit-overflow-scrolling: touch;
 }
 
 @media (max-width: 480px) {

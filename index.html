@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
     <title>Pravir & Partner - Wedding Invitation</title>
     
     <!-- Google Fonts -->
@@ -44,6 +47,11 @@
             transform: translateY(60px) scale(0.95);
             transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-sizing: border-box;
+            -webkit-transform: translateY(60px) scale(0.95);
+            -webkit-transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            will-change: transform, opacity;
         }
         
         .content.animate {
@@ -100,10 +108,23 @@
             0% {
                 text-shadow: 0 0 10px rgba(255,255,255,0.5);
                 transform: scale(1);
+                -webkit-transform: scale(1);
             }
             100% {
                 text-shadow: 0 0 25px rgba(255,255,255,0.9), 0 0 35px rgba(255,215,0,0.7);
                 transform: scale(1.02);
+                -webkit-transform: scale(1.02);
+            }
+        }
+        
+        @-webkit-keyframes textGlow {
+            0% {
+                text-shadow: 0 0 10px rgba(255,255,255,0.5);
+                -webkit-transform: scale(1);
+            }
+            100% {
+                text-shadow: 0 0 25px rgba(255,255,255,0.9), 0 0 35px rgba(255,215,0,0.7);
+                -webkit-transform: scale(1.02);
             }
         }
         
@@ -111,14 +132,111 @@
             0% {
                 opacity: 0;
                 transform: scale(0.8) translateY(30px);
+                -webkit-transform: scale(0.8) translateY(30px);
             }
             60% {
                 opacity: 0.8;
                 transform: scale(0.95) translateY(5px);
+                -webkit-transform: scale(0.95) translateY(5px);
             }
             100% {
                 opacity: 1;
                 transform: scale(1) translateY(0);
+                -webkit-transform: scale(1) translateY(0);
+            }
+        }
+        
+        /* Additional animations for photo1 section */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+                -webkit-transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                -webkit-transform: translateY(0);
+            }
+        }
+        
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+                -webkit-transform: scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+                -webkit-transform: scale(1);
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+                -webkit-transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+                -webkit-transform: translateY(0);
+            }
+        }
+        
+        @keyframes spinIn {
+            from {
+                opacity: 0;
+                transform: rotate(-360deg) scale(0.5);
+                -webkit-transform: rotate(-360deg) scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(0deg) scale(1);
+                -webkit-transform: rotate(0deg) scale(1);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+                -webkit-transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+                -webkit-transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+                -webkit-transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+                -webkit-transform: translateX(0);
+            }
+        }
+        
+        @keyframes heartbeat {
+            0% {
+                transform: scale(1);
+                -webkit-transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+                -webkit-transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+                -webkit-transform: scale(1);
             }
         }
         
@@ -189,11 +307,26 @@
             }
         }
         
+        /* iOS and Mobile specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            .section {
+                background-attachment: scroll !important;
+                -webkit-overflow-scrolling: touch;
+                -webkit-transform: translate3d(0,0,0);
+                transform: translate3d(0,0,0);
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+            }
+        }
+        
         /* Mobile responsiveness */
         @media (max-width: 768px) {
             .section {
                 background-attachment: scroll !important;
                 padding: 60px 0;
+                -webkit-overflow-scrolling: touch;
+                -webkit-transform: translate3d(0,0,0);
+                transform: translate3d(0,0,0);
             }
             .content {
                 padding: 40px 15px;
