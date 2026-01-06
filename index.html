@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
     <title>Pravir & Partner - Wedding Invitation</title>
     
     <!-- Google Fonts -->
@@ -253,7 +253,7 @@
 </head>
 <body>
     <!-- Hero Section -->
-    <section class="section hero" style="min-height: 100vh;">
+    <section class="section hero">
         <div class="content">
             <h1 class="animate-text">Pravir & Partner</h1>
             <p class="subtitle animate-text">Together Forever</p>
@@ -285,99 +285,7 @@
                 <h2 style="font-family: 'Playfair Display', serif; font-size: 3.5rem; color: #4CAF50; margin: 0.5rem 0; font-weight: 600; opacity: 1; animation: slideInRight 1s ease-out 2s;">Amala</h2>
             </div>
         </div>
-        
-        <!-- Custom animations for this section -->
-        <style>
-            .photo1 .content {
-                padding: 60px 20px;
-                max-width: 90%;
-            }
-            
-            @keyframes slideDown {
-                from { opacity: 0; transform: translateY(-30px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-            
-            @keyframes zoomIn {
-                from { opacity: 0; transform: scale(0.8); }
-                to { opacity: 1; transform: scale(1); }
-            }
-            
-            @keyframes fadeInUp {
-                from { opacity: 0; transform: translateY(20px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-            
-            @keyframes spinIn {
-                from { opacity: 0; transform: scale(0.5) rotate(180deg); }
-                to { opacity: 1; transform: scale(1) rotate(0deg); }
-            }
-            
-            @keyframes slideInLeft {
-                from { opacity: 0; transform: translateX(-50px); }
-                to { opacity: 1; transform: translateX(0); }
-            }
-            
-            @keyframes slideInRight {
-                from { opacity: 0; transform: translateX(50px); }
-                to { opacity: 1; transform: translateX(0); }
-            }
-            
-            @keyframes heartbeat {
-                0% { opacity: 0; transform: scale(0.3); }
-                30% { opacity: 1; transform: scale(1.2); }
-                50% { transform: scale(0.9); }
-                70% { transform: scale(1.1); }
-                100% { opacity: 1; transform: scale(1); }
-            }
-            
-            /* Mobile adjustments for photo1 section */
-            @media (max-width: 768px) {
-                .photo1 .content {
-                    padding: 40px 15px;
-                    max-width: 95%;
-                }
-                .photo1 h3 {
-                    font-size: 2rem !important;
-                    letter-spacing: 0.1em !important;
-                }
-                .photo1 h1 {
-                    font-size: 3.5rem !important;
-                }
-                .photo1 h2 {
-                    font-size: 2.5rem !important;
-                }
-                .photo1 p {
-                    font-size: 1.5rem !important;
-                }
-                .photo1 div[style*="font-size: 6rem"] {
-                    font-size: 4rem !important;
-                }
-            }
-            
-            @media (max-width: 480px) {
-                .photo1 .content {
-                    padding: 30px 10px;
-                    max-width: 98%;
-                }
-                .photo1 h3 {
-                    font-size: 1.6rem !important;
-                    letter-spacing: 0.05em !important;
-                }
-                .photo1 h1 {
-                    font-size: 2.8rem !important;
-                }
-                .photo1 h2 {
-                    font-size: 2rem !important;
-                }
-                .photo1 p {
-                    font-size: 1.2rem !important;
-                }
-                .photo1 div[style*="font-size: 6rem"] {
-                    font-size: 3rem !important;
-                }
-            }
-        </style>
+
     </section>
 
     <!-- Pre-wedding Photo Section 2 -->
@@ -554,11 +462,14 @@
                 // Responsive initial settings
                 if (isMobile) {
                     document.body.style.backgroundAttachment = 'scroll';
-                    document.body.style.backgroundSize = 'contain';
+                    document.body.style.backgroundSize = 'cover';
                     document.body.style.backgroundPosition = 'center center';
+                    document.body.style.height = '100vh';
+                    document.body.style.minHeight = '100vh';
+                    document.documentElement.style.height = '100vh';
                 } else {
                     document.body.style.backgroundAttachment = 'fixed';
-                    document.body.style.backgroundSize = 'contain';
+                    document.body.style.backgroundSize = 'cover';
                     document.body.style.backgroundPosition = 'center center';
                 }
             }
@@ -604,11 +515,14 @@
                 // Responsive background settings
                 if (isMobile) {
                     document.body.style.backgroundAttachment = 'scroll';
-                    document.body.style.backgroundSize = 'contain';
+                    document.body.style.backgroundSize = 'cover';
                     document.body.style.backgroundPosition = 'center center';
+                    document.body.style.height = '100vh';
+                    document.body.style.minHeight = '100vh';
+                    document.documentElement.style.height = '100vh';
                 } else {
                     document.body.style.backgroundAttachment = 'fixed';
-                    document.body.style.backgroundSize = 'contain';
+                    document.body.style.backgroundSize = 'cover';
                     document.body.style.backgroundPosition = 'center center';
                 }
             }
@@ -699,11 +613,11 @@
                 // Update background properties responsively
                 if (newIsMobile) {
                     document.body.style.backgroundAttachment = 'scroll';
-                    document.body.style.backgroundSize = 'contain';
+                    document.body.style.backgroundSize = 'cover';
                     document.body.style.backgroundPosition = 'center center';
                 } else {
                     document.body.style.backgroundAttachment = 'fixed';
-                    document.body.style.backgroundSize = 'contain';
+                    document.body.style.backgroundSize = 'cover';
                     document.body.style.backgroundPosition = 'center center';
                 }
                 

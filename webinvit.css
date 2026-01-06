@@ -16,7 +16,7 @@ body {
     overflow-x: hidden;
     background-color: #000;
     background-image: url('images/couple1.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -31,7 +31,7 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -67,7 +67,7 @@ body {
 /* ===== HERO SECTION ===== */
 .hero {
     background-image: url('images/couple1.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -124,7 +124,7 @@ body {
 /* ===== LOVE STORY SECTION ===== */
 .love-story {
     background-image: url('images/couple2.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -153,7 +153,7 @@ body {
 /* ===== PHOTO SECTIONS ===== */
 .photo1 {
     background-image: url('images/couple3.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -164,7 +164,7 @@ body {
 
 .photo2 {
     background-image: url('images/couple4.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -175,7 +175,7 @@ body {
 
 .photo3 {
     background-image: url('images/couple5.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -186,7 +186,7 @@ body {
 
 .photo4 {
     background-image: url('images/couple6.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -197,7 +197,7 @@ body {
 
 .photo5 {
     background-image: url('images/couple7.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -208,7 +208,7 @@ body {
 
 .photo6 {
     background-image: url('images/couple8.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -219,7 +219,7 @@ body {
 
 .photo7 {
     background-image: url('images/couple9.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -230,7 +230,7 @@ body {
 
 .photo8 {
     background-image: url('images/couple10.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -241,7 +241,7 @@ body {
 
 .photo9 {
     background-image: url('images/couple11.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -252,7 +252,7 @@ body {
 
 .photo10 {
     background-image: url('images/couple12.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -263,7 +263,7 @@ body {
 
 .photo11 {
     background-image: url('images/couple1.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -274,7 +274,7 @@ body {
 
 .photo12 {
     background-image: url('images/couple2.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -304,7 +304,7 @@ body {
 
 .photo10 {
     background-image: url('images/couple12.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -313,7 +313,7 @@ body {
 
 .photo11 {
     background-image: url('images/couple1.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -322,7 +322,7 @@ body {
 
 .photo12 {
     background-image: url('images/couple2.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -347,7 +347,7 @@ body {
 /* ===== WEDDING DETAILS SECTION ===== */
 .wedding-details {
     background-image: url('images/couple3.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -397,7 +397,7 @@ body {
 /* ===== CLOSING SECTION ===== */
 .closing {
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('images/couple4.JPG');
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
@@ -426,10 +426,32 @@ body {
 
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
+    * {
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    html {
+        width: 100vw;
+        height: 100vh;
+        overflow-x: hidden;
+        background: inherit;
+    }
+    
     body {
         background-attachment: scroll !important;
-        background-size: contain !important;
+        background-size: cover !important;
         background-position: center center !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-repeat: no-repeat !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        min-height: 100vh !important;
+        overflow-x: hidden !important;
+        position: relative !important;
     }
     
     .content {
@@ -446,15 +468,20 @@ body {
     }
     
     .section {
-        height: auto !important;
+        height: 100vh !important;
         min-height: 100vh !important;
         background-attachment: scroll !important;
-        background-size: contain !important;
+        background-size: cover !important;
         background-position: center center !important;
-        transition: none;
+        background-repeat: no-repeat !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        transition: none !important;
         padding: 0 !important;
         width: 100vw !important;
         overflow: hidden !important;
+        position: relative !important;
     }
     
     .hero, .love-story, .wedding-details, .closing,
@@ -462,7 +489,11 @@ body {
     .photo6, .photo7, .photo8, .photo9, .photo10,
     .photo11, .photo12 {
         background-attachment: scroll !important;
-        background-size: contain !important;
+        background-size: cover !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-repeat: no-repeat !important;
         background-position: center center !important;
         height: auto !important;
         min-height: 100vh !important;
@@ -473,15 +504,23 @@ body {
 @media (max-width: 480px) {
     body {
         background-attachment: scroll !important;
-        background-size: contain !important;
+        background-size: cover !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-repeat: no-repeat !important;
         background-position: center center !important;
     }
     
     .section {
         background-attachment: scroll !important;
-        background-size: contain !important;
+        background-size: cover !important;
         background-position: center center !important;
-        height: auto !important;
+        background-repeat: no-repeat !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        height: 100vh !important;
         min-height: 100vh !important;
         padding: 0 !important;
         width: 100vw !important;
@@ -493,7 +532,11 @@ body {
     .photo6, .photo7, .photo8, .photo9, .photo10,
     .photo11, .photo12 {
         background-attachment: scroll !important;
-        background-size: contain !important;
+        background-size: cover !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-repeat: no-repeat !important;
         background-position: center center !important;
         height: auto !important;
         min-height: 100vh !important;
@@ -520,7 +563,11 @@ body {
     .section {
         min-height: 450px;
         padding: 15px 0;
-        background-size: contain !important;
+        background-size: cover !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-repeat: no-repeat !important;
         background-position: center center !important;
     }
     
@@ -529,7 +576,11 @@ body {
     .photo6, .photo7, .photo8, .photo9, .photo10,
     .photo11, .photo12 {
         min-height: 450px;
-        background-size: contain !important;
+        background-size: cover !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-repeat: no-repeat !important;
         background-position: center center !important;
     }
     
@@ -554,6 +605,10 @@ body {
         min-height: 100vh;
         padding: 10px 0;
         background-size: cover !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-repeat: no-repeat !important;
         background-position: center center !important;
     }
     
@@ -563,6 +618,10 @@ body {
     .photo11, .photo12 {
         min-height: 100vh;
         background-size: cover !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-repeat: no-repeat !important;
         background-position: center center !important;
     }
     
@@ -580,6 +639,10 @@ body {
     .section {
         background-attachment: scroll !important;
         background-size: cover !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-repeat: no-repeat !important;
         background-position: center center !important;
         height: auto !important;
         min-height: 100vh !important;
@@ -594,6 +657,10 @@ body {
     .photo11, .photo12 {
         background-attachment: scroll !important;
         background-size: cover !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-repeat: no-repeat !important;
         background-position: center center !important;
         height: auto !important;
         min-height: 100vh !important;
@@ -628,12 +695,20 @@ body {
     body {
         background-attachment: scroll !important;
         background-size: cover !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-repeat: no-repeat !important;
         background-position: center center !important;
     }
     
     .section {
         background-attachment: scroll !important;
         background-size: cover !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-repeat: no-repeat !important;
         background-position: center center !important;
         height: auto !important;
         min-height: 100vh !important;
@@ -648,6 +723,10 @@ body {
     .photo11, .photo12 {
         background-attachment: scroll !important;
         background-size: cover !important;
+        -webkit-background-size: cover !important;
+        -moz-background-size: cover !important;
+        -o-background-size: cover !important;
+        background-repeat: no-repeat !important;
         background-position: center center !important;
         height: auto !important;
         min-height: 100vh !important;
